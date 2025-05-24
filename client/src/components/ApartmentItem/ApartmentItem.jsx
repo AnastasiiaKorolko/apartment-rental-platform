@@ -8,9 +8,9 @@ const ApartmentItem = ({ apartment, onEdit }) => {
   const [confirmDelete, setConfirmDelete] = useState(false);
   
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('uk-UA', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'UAH',
+      currency: 'USD',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(price);
