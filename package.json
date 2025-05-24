@@ -1,13 +1,33 @@
 {
   "name": "apartment-rental-platform",
   "version": "1.0.0",
+  "description": "Full-stack apartment rental platform",
+  "main": "server/index.js",
   "scripts": {
-    "install": "npm install --prefix client && npm install --prefix server",
-    "build": "npm run build --prefix client",
-    "start": "npm start --prefix server",
-    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\""
+    "start": "cd server && npm start",
+    "dev": "cd server && npm run dev",
+    "install-server": "cd server && npm install",
+    "install-client": "cd client && npm install",
+    "install-all": "npm run install-server && npm run install-client",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run install-server"
   },
-  "devDependencies": {
-    "concurrently": "^7.6.0"
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "keywords": [
+    "apartment",
+    "rental",
+    "react",
+    "node",
+    "express",
+    "mongodb"
+  ],
+  "author": "Anastasia",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "apartment-rental-platform"
   }
 }

@@ -7,6 +7,7 @@ const path = require('path');
 const connectDB = require('./config/db');
 const apartmentRoutes = require('./routes/apartmentRoutes');
 
+
 const app = express();
 
 connectDB();
@@ -17,11 +18,15 @@ const corsOptions = {
     'http://localhost:5173',
     'https://apartment-rental-platform-fpmn.vercel.app'
   ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
+
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -29,7 +34,11 @@ app.get('/', (req, res) => {
   res.json({ 
     message: 'Apartment Rental API is running!', 
     status: 'OK',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    endpoints: {
+      apartments: '/api/apartments',
+      health: '/health'
+    }
   });
 });
 
@@ -43,12 +52,11 @@ app.get('/health', (req, res) => {
 
 app.use('/api/apartments', apartmentRoutes);
 
-app.get('*', (req, res) => {
-  if (req.path.startsWith('/api/')) {
-    res.status(404).json({ message: 'API endpoint not found' });
-  } else {
-    res.status(404).json({ message: 'Page not found' });
-  }
+app.use('/api/*', (req, res) => {
+  res.status(404).json({ 
+    message: `API endpoint ${req.originalUrl} not found`,
+    availableEndpoints: ['/api/apartments']
+  });
 });
 
 app.use((err, req, res, next) => {

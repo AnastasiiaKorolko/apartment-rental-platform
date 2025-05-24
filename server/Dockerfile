@@ -8,7 +8,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm ci --only=production
+RUN npm ci --only=production && npm cache clean --force
 
 COPY . .
 
@@ -25,4 +25,7 @@ EXPOSE 5000
 ENV NODE_ENV=development
 ENV PORT=5000
 
-CMD ["npm", "start"]
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:5000/health || exit 1
+
+CMD ["node", "index.js"]
