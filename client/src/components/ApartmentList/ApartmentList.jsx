@@ -19,7 +19,7 @@ const ApartmentList = ({ onEdit }) => {
   if (apartments.length === 0) {
     return (
       <div className={styles.emptyList}>
-        <p>Квартири не знайдено</p>
+        <p>No apartments found</p>
         {(filters.minPrice || filters.maxPrice || filters.rooms) && (
           <p>Try adjusting the filter parameters</p>
         )}
