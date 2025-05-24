@@ -16,10 +16,11 @@ const corsOptions = {
   origin: [
     'http://localhost:3000',
     'http://localhost:5173',
-    'https://apartment-rental-platform.vercel.app'
+    'https://apartment-rental-platform-fpmn.vercel.app'
   ],
   credentials: true
 };
+
 
 app.use(cors(corsOptions));
 app.use(express.json());
