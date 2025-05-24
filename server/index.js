@@ -27,6 +27,22 @@ app.use(express.json());
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Apartment Rental API is running!', 
+    status: 'OK',
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.get('/health', (req, res) => {
+  res.json({ 
+    message: 'Server is healthy!', 
+    status: 'OK',
+    timestamp: new Date().toISOString()
+  });
+});
+
 app.use('/api/apartments', apartmentRoutes);
 
 app.use((err, req, res, next) => {
