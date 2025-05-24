@@ -1,0 +1,26 @@
+# client/Dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm ci --only=production
+
+COPY . .
+
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S reactjs -u 1001
+
+RUN chown -R reactjs:nodejs /app
+USER reactjs
+
+EXPOSE 3000
+
+ENV NODE_ENV=development
+ENV REACT_APP_API_URL=http://localhost:5000/api
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3000/ || exit 1
+
+CMD ["npm", "start"]

@@ -1,0 +1,30 @@
+.apartmentList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+  color: var(--dark-gray);
+}
+
+.emptyList {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: var(--light-gray);
+  border-radius: 8px;
+  color: var(--dark-gray);
+}
+
+.emptyList p {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .apartmentList {
+    grid-template-columns: 1fr;
+  }
+}
