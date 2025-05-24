@@ -11,7 +11,7 @@ const {
 } = require('../controllers/apartmentController');
 
 
-const imageTypes = /jpeg|jpg|png|webp|gif/;
+const imageTypes = /jpeg|jpg|png|webp|avif|gif/;
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, 'uploads/'),
