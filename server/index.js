@@ -7,7 +7,6 @@ const path = require('path');
 const connectDB = require('./config/db');
 const apartmentRoutes = require('./routes/apartmentRoutes');
 
-
 const app = express();
 
 connectDB();
@@ -20,7 +19,6 @@ const corsOptions = {
   ],
   credentials: true
 };
-
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -44,6 +42,14 @@ app.get('/health', (req, res) => {
 });
 
 app.use('/api/apartments', apartmentRoutes);
+
+app.get('*', (req, res) => {
+  if (req.path.startsWith('/api/')) {
+    res.status(404).json({ message: 'API endpoint not found' });
+  } else {
+    res.status(404).json({ message: 'Page not found' });
+  }
+});
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
