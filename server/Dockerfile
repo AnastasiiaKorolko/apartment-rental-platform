@@ -25,7 +25,4 @@ EXPOSE 5000
 ENV NODE_ENV=development
 ENV PORT=5000
 
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:5000/api/health || exit 1
-
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]
