@@ -95,9 +95,9 @@ cd client
 npm install
 npm start
 URLs
-Frontend: http://localhost:3000
+Frontend (Vercel): https://apartment-rental-platform-fpmn.vercel.app/
 
-Backend API: http://localhost:5000
+Backend (Railway): https://kind-solace-production.up.railway.app
 
 API Endpoints
 Apartments
